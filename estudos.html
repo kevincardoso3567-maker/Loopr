@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudos - Loopr</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="estudos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        <img src="LOGO-TEXTO.png" alt="Logo Loopr" class="logo-image">
+      </div>
+      <div class="user-info">
+        <i class="fa-solid fa-moon"></i>
+        <i class="fa-solid fa-user-circle"></i>
+        <i class="fa-solid fa-bell"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-layout-wrapper">
+    <!-- SIDEBAR COM LINKS (MESMA PÁGINA) -->
+    <nav class="sidebar">
+      <a href="index.html" class="nav-button"><i class="fa-solid fa-home"></i> Rotina</a>
+      <a href="foco.html" class="nav-button"><i class="fa-solid fa-bolt"></i> Foco</a>
+      <a href="analises.html" class="nav-button"><i class="fa-solid fa-chart-line"></i> Análises</a>
+      <a href="estudos.html" class="nav-button active"><i class="fa-solid fa-book"></i> Estudos</a>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content-area">
+      <div class="content-primary">
+        <div class="card">
+          <h1 id="pageTitle">Segunda Semana – Novembro 2025</h1>
+
+          <!-- Week Navigation -->
+          <div class="week-navigation">
+            <button id="prevWeek" class="nav-arrow"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="week-selector">
+              <label>Escolher Semana:</label>
+              <select id="weekSelect"></select>
+            </div>
+            <button id="nextWeek" class="nav-arrow"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+
+          <!-- Days Tabs -->
+          <div class="days-tabs">
+            <button class="day-tab active" data-day="seg">Seg</button>
+            <button class="day-tab" data-day="ter">Ter</button>
+            <button class="day-tab" data-day="qua">Qua</button>
+            <button class="day-tab" data-day="qui">Qui</button>
+            <button class="day-tab" data-day="sex">Sex</button>
+            <button class="day-tab" data-day="sab">Sáb</button>
+            <button class="day-tab" data-day="dom">Dom</button>
+          </div>
+
+          <!-- Day Content -->
+          <div class="day-content">
+            <div class="day-header">
+              <h2 id="selectedDayTitle">Segunda-feira</h2>
+            </div>
+            <div class="day-subjects" id="daySubjects">
+              <!-- Cards inseridos por JS -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD SUBJECT -->
+      <div class="content-secondary">
+        <div class="card add-subject">
+          <h3>Adicionar matéria</h3>
+
+          <div class="icon-upload">
+            <label for="iconUpload">Adicionar ícone</label>
+            <input type="file" id="iconUpload" accept="image/*" />
+            <div id="iconPreview" class="icon-preview">
+              <i class="fa-solid fa-image"></i>
+            </div>
+          </div>
+
+          <input type="text" placeholder="Nome da matéria" class="input-field" id="subjectName" />
+          
+          <select class="input-field" id="subjectWeek">
+            <option value="">Escolher semana</option>
+          </select>
+
+          <select class="input-field" id="subjectDay">
+            <option value="">Dia da semana</option>
+            <option value="seg">Segunda</option>
+            <option value="ter">Terça</option>
+            <option value="qua">Quarta</option>
+            <option value="qui">Quinta</option>
+            <option value="sex">Sexta</option>
+            <option value="sab">Sábado</option>
+            <option value="dom">Domingo</option>
+          </select>
+
+          <input type="text" placeholder="Horário (ex: 20:00)" class="input-field" id="subjectTime" />
+
+          <button class="add-btn" id="addSubjectBtn">+ Nova matéria</button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <p>© 2025 Loopr - Seu Gerenciador de Produtividade</p>
+  </footer>
+
+  <script src="index.js"></script>
+  <script src="estudos.js"></script>
+</body>
+</html>

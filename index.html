@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loopr - Seu Gerenciador de Produtividade</title>
+    <link rel="stylesheet" href="index.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <img src="LOGO-TEXTO.png" alt="Logo Loopr" class="logo-image">
+            </div>
+            <div class="user-info">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout-wrapper">
+        <!-- SIDEBAR: ABRE NA MESMA GUIA -->
+        <nav class="sidebar">
+            <a href="index.html" class="nav-button active">Rotina</a>
+            <a href="foco.html" class="nav-button">Foco</a>
+            <a href="analises.html" class="nav-button">Análises</a>
+            <a href="estudos.html" class="nav-button">Estudos</a>
+        </nav>
+
+        <main class="main-content-area">
+            <div class="content-primary">
+                <!-- ABA ROTINA -->
+                <div id="rotina" class="tab-content active">
+                    <div class="card card-calendar">
+                        <div class="card-title">
+                            <span id="currentMonthYear" class="month-year-display">Novembro 2025</span>
+                            <div class="calendar-nav-group">
+                                <button class="calendar-nav" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+                                <button class="calendar-nav" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="calendar-grid" id="calendarGrid">
+                            <div class="day-name">Dom</div>
+                            <div class="day-name">Seg</div>
+                            <div class="day-name">Ter</div>
+                            <div class="day-name">Qua</div>
+                            <div class="day-name">Qui</div>
+                            <div class="day-name">Sex</div>
+                            <div class="day-name">Sáb</div>
+                        </div>
+                    </div>
+                    
+                    <div class="card task-list-container">
+                        <div class="card-title">
+                            Tarefas de <span id="selectedDayName" class="accent-text"></span>, <span id="selectedDateDisplay"></span>
+                        </div>
+                        <ul class="task-list" id="taskListItems"></ul>
+                        <div class="task-input-group">
+                            <input type="text" id="taskInput" class="task-input" placeholder="Nova tarefa...">
+                            <button id="addTaskButton" class="task-button"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA FOCO -->
+                <div id="foco" class="tab-content">
+                    <div class="card card-center">
+                        <h2 class="card-title">Cronômetro & Temporizador</h2>
+                        <div class="timer-mode-toggle">
+                            <button id="modeStopwatch" class="nav-button active">Cronômetro</button>
+                            <button id="modeCountdown" class="nav-button">Temporizador</button>
+                        </div>
+                        <div id="timerDisplay" class="timer-display">00:00:00</div>
+                        <div id="countdownInputGroup" class="countdown-input-group" style="display: none;">
+                            <label for="countdownInput" class="sub-text-label">Minutos de Foco (Padrão: 25min):</label>
+                            <input type="number" id="countdownInput" min="1" value="25" class="task-input countdown-input">
+                        </div>
+                        <div class="timer-controls">
+                            <button id="startStopTimer" class="start-stop">Iniciar</button>
+                            <button id="resetTimer" class="reset">Reiniciar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ABA INSIGHTS -->
+                <div id="insights" class="tab-content">
+                    <h2 class="card-title-lg">Insights & Análise</h2>
+                    <div class="card card-center">
+                        <p class="sub-text-label">Total de Tarefas</p>
+                        <div class="metric-value accent-text">--</div>
+                        <div class="metric-detail-row">
+                            <span class="green-text">Concluídas: --</span>
+                            <span class="red-text">Pendentes: --</span>
+                        </div>
+                        <p class="sub-text-label" style="margin-top: 1.5rem;">Funcionalidade de análise (injetada via JS).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PROGRESSO DIÁRIO -->
+            <div class="content-secondary">
+                <div class="card progress-card">
+                    <h2 class="card-title">Progresso Diário</h2>
+                    <div class="progress-circle">
+                        <svg class="progress-ring" width="200" height="200">
+                            <circle class="progress-ring__background" stroke="#1f3a5f" stroke-width="14" fill="transparent" r="86" cx="100" cy="100"/>
+                            <circle class="progress-ring__progress" stroke="#00e6e6" stroke-width="14" fill="transparent" r="86" cx="100" cy="100" stroke-dasharray="540" stroke-dashoffset="540"/>
+                        </svg>
+                        <div class="progress-circle__value" id="progressDisplayLarge">0%</div>
+                    </div>
+                    <p class="card-subtitle">Tarefas concluídas</p>
+                    <p class="metric-value-sm" id="completedCountDisplay">0</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Loopr - Seu Gerenciador de Produtividade</p>
+    </footer>
+    
+    <script src="index.js"></script>
+</body>
+</html>

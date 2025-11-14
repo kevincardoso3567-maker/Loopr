@@ -1,0 +1,315 @@
+/* ========================================= */
+/* ESTUDOS - APENAS ESTILOS ESPECÍFICOS */
+/* ========================================= */
+
+.card {
+  background: #0F172A !important;
+  border: none !important;
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  margin-bottom: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+/* Navegação da Semana */
+.week-navigation {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: flex-start;
+}
+
+.nav-arrow {
+  background: #1E293B;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #94A3B8;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.nav-arrow:hover:not(:disabled) {
+  background: #334155;
+  color: white;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.week-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.week-selector label {
+  color: #94A3B8;
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+.week-selector select,
+.input-field select {
+  background: #1E293B;
+  color: white;
+  border: 1px solid #334155;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  min-width: 140px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2364748B' viewBox='0 0 20 20'%3E%3Cpath d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  background-size: 12px;
+}
+
+/* Abas dos Dias */
+.days-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.day-tab {
+  background: #1E293B;
+  color: #94A3B8;
+  border: none;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.day-tab.active {
+  background: #06B6D4;
+  color: white;
+}
+
+.day-tab:hover:not(.active) {
+  background: #334155;
+  color: white;
+}
+
+/* Conteúdo do Dia */
+.day-content {
+  min-height: 400px;
+}
+
+.day-header {
+  margin-bottom: 1.5rem;
+}
+
+.day-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+.day-subjects {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.day-subject-card {
+  background: #1E293B;
+  border-radius: 16px;
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: transform 0.2s ease;
+}
+
+.day-subject-card:hover {
+  transform: translateY(-4px);
+}
+
+.day-subject-card .icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: #334155;
+}
+
+.day-subject-card .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.day-subject-card .subject-info h3 {
+  font-size: 1.1rem;
+  margin: 0 0 0.25rem;
+  color: white;
+}
+
+.day-subject-card .subject-info p {
+  font-size: 0.875rem;
+  margin: 0;
+  color: #94A3B8;
+}
+
+.check-btn {
+  background: #334155;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.check-btn.done {
+  background: #06B6D4;
+}
+
+/* Adicionar Matéria */
+.add-subject {
+  padding: 1.5rem;
+  background: #1E293B;
+  border-radius: 20px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.add-subject h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.icon-upload {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.icon-upload label {
+  display: block;
+  color: #94A3B8;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+#iconUpload { display: none; }
+
+.icon-preview {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  background: #334155;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: #64748B;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px dashed #334155;
+  transition: all 0.3s;
+}
+
+.icon-preview:hover { border-color: #06B6D4; }
+
+.icon-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.icon-preview i { pointer-events: none; }
+
+.input-field {
+  display: block;
+  width: 100%;
+  background: #0F172A;
+  border: 1px solid #334155;
+  color: white;
+  padding: 0.875rem 1rem;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+}
+
+.input-field::placeholder { color: #64748B; }
+
+.add-btn {
+  background: #06B6D4;
+  color: white;
+  border: none;
+  padding: 0.875rem 1.5rem;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  width: 100%;
+}
+
+.add-btn:hover { background: #0891B2; }
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .main-content-area { grid-template-columns: 1fr; }
+  .content-secondary { margin-top: 2rem; }
+  .week-navigation, .days-tabs { justify-content: center; }
+}
+
+/* ========================================= */
+/* REMOVER SUBLINHADO DOS LINKS DA SIDEBAR */
+/* ========================================= */
+
+.sidebar a.nav-button {
+  text-decoration: none;
+  color: inherit;
+}
+
+.sidebar a.nav-button:hover,
+.sidebar a.nav-button.active,
+.sidebar a.nav-button:focus,
+.sidebar a.nav-button:active {
+  text-decoration: none !important;
+  outline: none;
+}
