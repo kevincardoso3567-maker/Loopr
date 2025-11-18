@@ -71,9 +71,8 @@ function renderDay(week, day) {
         ? `<div class="icon"><img src="${s.iconSrc}" alt="Ícone"></div>`
         : `<div class="icon" style="background: ${getRandomColor()};">${getRandomIcon()}</div>`;
 
-      const statusImg = s.done 
-        ? 'assets/CK.png' 
-        : 'assets/AN.png';
+      // CORREÇÃO AQUI → caminho correto + imagem visível
+      const statusImg = s.done ? 'CK.png' : 'AN.png';   // ← se estiver em pasta assets/, troque pra 'assets/CK.png'
 
       card.innerHTML = `
         ${iconHTML}
@@ -81,8 +80,8 @@ function renderDay(week, day) {
           <h3>${s.name}</h3>
           <p>${s.time}</p>
         </div>
-        <button class="check-btn ${s.done ? 'done' : ''}" style="background: none; border: none; padding: 0; cursor: pointer;">
-          <img src="${statusImg}" alt="${s.done ? 'Concluído' : 'Pendente'}" style="width: 36px; height: 36px;">
+        <button class="check-btn ${s.done ? 'done' : ''}">
+          <img src="${statusImg}" alt="${s.done ? 'Concluído' : 'Pendente'}" class="check-icon">
         </button>
       `;
 
@@ -98,7 +97,7 @@ function renderDay(week, day) {
   }
 }
 
-// === OUTRAS FUNÇÕES ===
+// === OUTRAS FUNÇÕES (100% originais suas) ===
 function populateWeekSelects() {
   const selects = [document.getElementById('weekSelect'), document.getElementById('subjectWeek')];
   selects.forEach(select => {
