@@ -1,0 +1,114 @@
+/* FOCO.CSS - 100% no padrão Loopr */
+.focus-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.tab-btn {
+  background: #1E293B;
+  color: #94A3B8;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab-btn.active, .tab-btn:hover {
+  background: #06B6D4;
+  color: white;
+}
+
+.mode { display: none; text-align: center; }
+.mode.active { display: block; animation: fadeIn 0.4s ease; }
+
+.clock-display {
+  font-size: 5.5rem;
+  font-weight: 800;
+  color: #06B6D4;
+  letter-spacing: 4px;
+  margin: 2rem 0;
+  text-shadow: 0 0 20px rgba(6,182,212,0.5);
+}
+
+.timer-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.timer-inputs input {
+  width: 80px;
+  background: #0F172A;
+  border: 2px solid #334155;
+  color: white;
+  text-align: center;
+  padding: 0.8rem;
+  border-radius: 12px;
+  font-size: 1.2rem;
+}
+
+.timer-inputs button, .stopwatch-controls button, .alarm-input button {
+  background: #06B6D4;
+  color: white;
+  border: none;
+  padding: 0.9rem 1.8rem;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.timer-inputs button:hover, .stopwatch-controls button:hover, .alarm-input button:hover {
+  background: #0891B2;
+  transform: translateY(-3px);
+}
+
+.stopwatch-controls, .alarm-input {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.progress-bar-container {
+  height: 12px;
+  background: #1E293B;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 2rem auto;
+  width: 80%;
+  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(90deg, #06B6D4, #0891B2);
+  border-radius: 6px;
+  transition: width 0.4s linear;
+}
+
+.alarm-status {
+  margin-top: 2rem;
+  font-size: 1.2rem;
+  color: #94A3B8;
+}
+
+.alarm-status.active {
+  color: #06B6D4;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}

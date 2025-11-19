@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loopr • Análises</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* ESTILOS DAS SEMANAS */
+        .weeks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+        .week-box {
+            background: var(--card-bg);
+            padding: 1.8rem 1.2rem;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        .week-box.best {
+            border: 3px solid var(--accent-color);
+            box-shadow: 0 0 25px rgba(0, 230, 230, 0.35);
+            transform: translateY(-4px);
+        }
+        .week-box h3 { color: var(--accent-color); margin: 0 0 0.8rem; font-size: 1.3rem; }
+        .week-box .percent { font-size: 3.2rem; font-weight: 800; color: white; margin: 0.6rem 0; }
+        .week-box .details { color: var(--sub-text-color); font-size: 0.95rem; margin: 0.5rem 0; }
+        .week-box small { color: #64748B; font-size: 0.85rem; }
+
+        /* ESTILOS DO COMPARADOR */
+        .month-select {
+            width: 100%;
+            padding: 0.9rem 1.2rem;
+            background: var(--input-bg);
+            border: 1px solid var(--accent-color);
+            border-radius: 12px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            font-weight: 600;
+            outline: none;
+            transition: all 0.3s;
+        }
+        .month-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(0,230,230,0.3);
+        }
+        #comparisonResult .winner {
+            font-size: 2.6rem;
+            font-weight: 800;
+            color: var(--accent-color);
+            text-shadow: 0 0 20px rgba(0,230,230,0.5);
+            margin: 1rem 0;
+        }
+        #comparisonResult .tie {
+            font-size: 2.2rem;
+            color: #fbbf24;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="top-bar">
+            <div class="logo">
+                <img src="LOGO-TEXTO.png" alt="Logo Loopr" class="logo-image">
+            </div>
+            <div class="user-info">
+                <i class="fa-solid fa-bell"></i>
+                <i class="fa-solid fa-user-circle"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-layout-wrapper">
+        <nav class="sidebar">
+            <a href="index.html" class="nav-button">Rotina</a>
+            <a href="foco.html" class="nav-button">Foco</a>
+            <a href="analises.html" class="nav-button active">Análises</a>
+            <a href="estudos.html" class="nav-button">Estudos</a>
+            <a href="quadro.html" class="nav-button">Quadro</a>
+            <a href="fit.html" class="nav-button">FIT</a>
+            <a href="personalizacao.html" class="nav-button">Personalização</a>
+        </nav>
+
+        <main class="main-content-area">
+            <!-- CONTEÚDO OCUPA 100% DA TELA -->
+            <div class="content-primary" style="grid-column: 1 / -1;">
+
+                <!-- ANÁLISE SEMANAL DO MÊS ATUAL -->
+                <div class="card card-calendar">
+                    <div class="card-title">
+                        <span id="monthTitle" class="month-year-display">Análise Semanal</span>
+                        <div class="calendar-nav-group">
+                            <button class="calendar-nav" id="prevMonth"><i class="fa-solid fa-chevron-left"></i></button>
+                            <button class="calendar-nav" id="nextMonth"><i class="fa-solid fa-chevron-right"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="weeks-grid" id="weeksContainer">
+                        <p class="sub-text-label" style="grid-column:1/-1;text-align:center;margin:3rem 0;">
+                            Carregando suas tarefas...
+                        </p>
+                    </div>
+                </div>
+
+                <!-- RESUMO DO MÊS ATUAL -->
+                <div class="card" style="margin-top:1.5rem;padding:2rem;">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;text-align:center;">
+                        <div>
+                            <p class="sub-text-label">Melhor Semana</p>
+                            <div class="metric-value accent-text" id="bestWeek">-</div>
+                        </div>
+                        <div>
+                            <p class="sub-text-label">Média do Mês</p>
+                            <div class="metric-value accent-text" id="monthAverage">0%</div>
+                        </div>
+                        <div>
+                            <p class="sub-text-label">Total de Tarefas</p>
+                            <div class="metric-value accent-text" id="totalTasks">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COMPARADOR DE MESES -->
+                <div class="card" style="margin-top:2rem;padding:2rem;">
+                    <h2 class="card-title" style="text-align:center;margin-bottom:1.8rem;color:var(--accent-color);">
+                        Comparador de Meses
+                    </h2>
+
+                    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;align-items:end;">
+                        <div>
+                            <label class="sub-text-label" style="display:block;margin-bottom:0.5rem;">Primeiro mês</label>
+                            <select id="month1" class="month-select"></select>
+                        </div>
+
+                        <div style="text-align:center;font-size:2.8rem;font-weight:800;color:var(--accent-color);padding-bottom:0.5rem;">
+                            VS
+                        </div>
+
+                        <div>
+                            <label class="sub-text-label" style="display:block;margin-bottom:0.5rem;">Segundo mês</label>
+                            <select id="month2" class="month-select"></select>
+                        </div>
+                    </div>
+
+                    <div id="comparisonResult" style="margin-top:2.5rem;text-align:center;min-height:140px;">
+                        <p class="sub-text-label">Selecione dois meses para comparar</p>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>© 2025 Loopr - Seu Gerenciador de Produtividade</p>
+    </footer>
+
+    <script src="analises.js"></script>
+</body>
+</html>

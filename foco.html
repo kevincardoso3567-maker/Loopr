@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loopr • Foco</title>
+  <link rel="stylesheet" href="index.css"/> <!-- seu CSS global -->
+  <link rel="stylesheet" href="foco.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- HEADER (igual todas as páginas) -->
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        <img src="LOGO-TEXTO.png" alt="Loopr" class="logo-image">
+      </div>
+      <div class="user-info">
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-user"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-layout-wrapper">
+
+  <!-- SIDEBAR: ABRE NA MESMA GUIA -->
+        <nav class="sidebar">
+            <a href="index.html" class="nav-button active">Rotina</a>
+            <a href="foco.html" class="nav-button">Foco</a>
+            <a href="analises.html" class="nav-button">Análises</a>
+            <a href="estudos.html" class="nav-button">Estudos</a>
+            <a href="quadro.html" class="nav-button">Quadro</a>
+            <a href="fit.html" class="nav-button">FIT</a>
+            <a href="personalização.html" class="nav-button">Personalização</a>
+        </nav>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="main-content-area">
+      <div class="content-primary">
+        <div class="card">
+          <h1>Foco Total</h1>
+
+          <!-- ABAS -->
+          <div class="focus-tabs">
+            <button class="tab-btn active" data-mode="clock">Relógio</button>
+            <button class="tab-btn" data-mode="stopwatch">Cronômetro</button>
+            <button class="tab-btn" data-mode="timer">Timer</button>
+            <button class="tab-btn" data-mode="alarm">Alarme</button>
+          </div>
+
+          <!-- RELOGIO -->
+          <div id="clock-mode" class="mode active">
+            <div class="clock-display">--:--:--</div>
+          </div>
+
+          <!-- CRONÔMETRO -->
+          <div id="stopwatch-mode" class="mode">
+            <div class="clock-display">00:00:00</div>
+            <div class="stopwatch-controls">
+              <button id="startStopwatch">Iniciar</button>
+              <button id="pauseStopwatch">Pausar</button>
+              <button id="resetStopwatch">Zerar</button>
+            </div>
+          </div>
+
+          <!-- TIMER POMODORO -->
+          <div id="timer-mode" class="mode">
+            <div class="timer-inputs">
+              <input type="number" id="timerMinutes" min="1" max="99" value="25"/> min
+              <input type="number" id="timerSeconds" min="0" max="59" value="0"/> seg
+              <button id="startTimer">Começar</button>
+            </div>
+            <div class="clock-display">25:00</div>
+            <div class="progress-bar-container">
+              <div class="progress-bar-fill"></div>
+            </div>
+          </div>
+
+          <!-- ALARME -->
+          <div id="alarm-mode" class="mode">
+            <div class="alarm-input">
+              <input type="time" id="alarmTime"/>
+              <button id="setAlarm">Definir Alarme</button>
+            </div>
+            <div class="alarm-status">Nenhum alarme definido</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- FOOTER (igual todas as páginas) -->
+  <footer>
+    <p>© 2025 Loopr • Feito com amor e café</p>
+  </footer>
+
+  <script src="foco.js"></script>
+</body>
+</html>
