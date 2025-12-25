@@ -1,114 +1,347 @@
-/* FOCO.CSS - 100% no padrão Loopr */
+/* ========================================= */
+/* FOCO.CSS - Loopr • Foco Pro */
+/* Integrado com a Paleta Global e Sidebar */
+/* ========================================= */
+
+:root {
+    --primary-bg: #0a1f33;
+    --card-bg: #102e4d;
+    --accent-color: #00e6e6;
+    --text-color: #f3f4f6;
+    --sub-text-color: #9ca3af;
+    --input-bg: #1f2937;
+    --input-border: #374151;
+    --accent-color-rgb: 0, 230, 230;
+    --sidebar-width: 200px;
+    
+    /* Variáveis específicas do Foco baseadas na paleta */
+    --primary-glow: rgba(0, 230, 230, 0.3);
+}
+
+/* 1. HEADER - AJUSTE DE ÍCONES (Sino e Perfil) */
+.user-info {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.user-info button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease;
+}
+
+.user-info i {
+    font-size: 1.6rem;
+    color: #003b38; /* Cor escura para contrastar com o Header #08D5CB */
+    transition: color 0.2s;
+}
+
+.user-info button:hover i {
+    color: #000000;
+}
+
+.user-info button:hover {
+    transform: scale(1.15);
+}
+
+/* 2. Ajustes de Layout Específicos para a Área de Foco */
+.focus-card {
+    grid-column: span 12;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+/* 3. Abas de Navegação (Estilo Pílula Loopr) */
 .focus-tabs {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--card-bg);
+    padding: 0.6rem;
+    border-radius: 999px;
+    border: 1px solid white;
+    margin-bottom: 3rem;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tab-btn {
-  background: #1E293B;
-  color: #94A3B8;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 999px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
+    padding: 0.8rem 1.8rem;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--sub-text-color);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
 }
 
-.tab-btn.active, .tab-btn:hover {
-  background: #06B6D4;
-  color: white;
+.tab-btn:hover {
+    color: var(--text-color);
+    background: rgba(255, 255, 255, 0.05);
 }
 
-.mode { display: none; text-align: center; }
-.mode.active { display: block; animation: fadeIn 0.4s ease; }
-
-.clock-display {
-  font-size: 5.5rem;
-  font-weight: 800;
-  color: #06B6D4;
-  letter-spacing: 4px;
-  margin: 2rem 0;
-  text-shadow: 0 0 20px rgba(6,182,212,0.5);
+.tab-btn.active {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    box-shadow: 0 4px 15px var(--primary-glow);
 }
 
-.timer-inputs {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 1.5rem;
+/* 4. Containers de Modo (Cards) */
+.mode { display: none; }
+.mode.active { 
+    display: block; 
+    animation: fadeInFoco 0.5s ease; 
 }
 
-.timer-inputs input {
-  width: 80px;
-  background: #0F172A;
-  border: 2px solid #334155;
-  color: white;
-  text-align: center;
-  padding: 0.8rem;
-  border-radius: 12px;
-  font-size: 1.2rem;
+@keyframes fadeInFoco {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-.timer-inputs button, .stopwatch-controls button, .alarm-input button {
-  background: #06B6D4;
-  color: white;
-  border: none;
-  padding: 0.9rem 1.8rem;
-  border-radius: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.3s;
+.mode-container {
+    background-color: var(--card-bg);
+    border: 1px solid white !important;
+    border-radius: 15px;
+    padding: 4rem 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.timer-inputs button:hover, .stopwatch-controls button:hover, .alarm-input button:hover {
-  background: #0891B2;
-  transform: translateY(-3px);
+.mode-title {
+    font-size: 1rem;
+    letter-spacing: 4px;
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
-.stopwatch-controls, .alarm-input {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-top: 1.5rem;
+/* 5. Display Principal (Relógio e Timer) */
+.big-number {
+    font-size: clamp(4rem, 15vw, 9rem);
+    font-weight: 800;
+    color: var(--text-color);
+    line-height: 1;
+    margin: 2rem 0;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 0 0 40px rgba(0, 230, 230, 0.2);
 }
 
-.progress-bar-container {
-  height: 12px;
-  background: #1E293B;
-  border-radius: 6px;
-  overflow: hidden;
-  margin: 2rem auto;
-  width: 80%;
-  box-shadow: inset 0 2px 8px rgba(0,0,0,0.4);
+.date-label {
+    font-size: 1.1rem;
+    color: var(--sub-text-color);
+    letter-spacing: 2px;
+    text-transform: uppercase;
 }
 
-.progress-bar-fill {
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(90deg, #06B6D4, #0891B2);
-  border-radius: 6px;
-  transition: width 0.4s linear;
+/* 6. Grid Relógio Mundial */
+.world-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
 }
 
-.alarm-status {
-  margin-top: 2rem;
-  font-size: 1.2rem;
-  color: #94A3B8;
+.world-card {
+    background: var(--primary-bg);
+    padding: 2rem;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: 0.3s;
 }
 
-.alarm-status.active {
-  color: #06B6D4;
-  animation: pulse 1.5s infinite;
+.world-card:hover {
+    border-color: var(--accent-color);
+    transform: translateY(-5px);
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
+.city { 
+    display: block; 
+    font-size: 0.8rem; 
+    color: var(--sub-text-color); 
+    margin-bottom: 0.5rem; 
+    letter-spacing: 2px;
+}
+
+.sub-time { 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+    color: var(--accent-color); 
+}
+
+/* 7. Inputs Circulares (Timer) */
+.setup-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.input-box input {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--primary-bg);
+    border: 2px solid var(--input-border);
+    color: var(--accent-color);
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    outline: none;
+    transition: 0.3s;
+    appearance: textfield; /* Remove setas padrão */
+}
+
+.input-box input::-webkit-inner-spin-button, 
+.input-box input::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
+.input-box input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px var(--primary-glow);
+    transform: scale(1.05);
+}
+
+.input-box label {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.75rem;
+    color: var(--sub-text-color);
+    font-weight: 600;
+}
+
+/* 8. Barra de Progresso */
+.bar-bg {
+    width: 100%;
+    max-width: 600px;
+    height: 10px;
+    background: var(--primary-bg);
+    border-radius: 10px;
+    margin: 2rem auto;
+    overflow: hidden;
+    border: 1px solid var(--input-border);
+}
+
+.bar-fill {
+    height: 100%;
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--primary-glow);
+    transition: width 0.5s linear;
+}
+
+/* 9. Botões de Ação */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 3rem;
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: var(--primary-bg);
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px var(--primary-glow);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--accent-color);
+    color: var(--accent-color);
+    padding: 1rem 2.5rem;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: rgba(0, 230, 230, 0.1);
+}
+
+/* 10. Tabela de Voltas (Cronômetro) */
+.table-container {
+    margin-top: 3rem;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--input-border);
+    background: var(--primary-bg);
+}
+
+.laps-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.laps-table th {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    color: var(--sub-text-color);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.laps-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--input-border);
+    font-family: monospace;
+}
+
+/* 11. Alarme UI */
+.alarm-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+#alarmInput {
+    background: var(--primary-bg);
+    border: 1px solid var(--accent-color);
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    outline: none;
+}
+
+/* Ajustes Responsivos para o Foco */
+@media (max-width: 1024px) {
+    .mode-container { padding: 2.5rem 1rem; }
+    .big-number { font-size: 5rem; }
+    .setup-grid { gap: 1rem; }
+    .input-box input { width: 90px; height: 90px; font-size: 1.8rem; }
 }
