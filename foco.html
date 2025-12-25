@@ -4,94 +4,161 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Loopr • Foco</title>
-  <link rel="stylesheet" href="index.css"/> <!-- seu CSS global -->
+  <link rel="stylesheet" href="index.css"/>
   <link rel="stylesheet" href="foco.css"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
 
-  <!-- HEADER (igual todas as páginas) -->
+  <!-- HEADER -->
   <header>
     <div class="top-bar">
       <div class="logo">
-        <img src="LOGO-TEXTO.png" alt="Loopr" class="logo-image">
+        <img src="LOGO-TEXTO.png" alt="Loopr • Foco" class="logo-image">
       </div>
       <div class="user-info">
-        <i class="fas fa-bell"></i>
-        <i class="fas fa-user"></i>
+        <button type="button" aria-label="Notificações">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button type="button" aria-label="Perfil">
+          <i class="fas fa-user"></i>
+        </button>
       </div>
     </div>
   </header>
 
   <div class="main-layout-wrapper">
 
-  <!-- SIDEBAR: ABRE NA MESMA GUIA -->
-        <nav class="sidebar">
-            <a href="index.html" class="nav-button active">Rotina</a>
-            <a href="foco.html" class="nav-button">Foco</a>
-            <a href="analises.html" class="nav-button">Análises</a>
-            <a href="estudos.html" class="nav-button">Estudos</a>
-            <a href="quadro.html" class="nav-button">Quadro</a>
-            <a href="fit.html" class="nav-button">FIT</a>
-            <a href="personalização.html" class="nav-button">Personalização</a>
-        </nav>
+    <!-- SIDEBAR -->
+    <nav class="sidebar">
+      <a href="index.html" class="nav-button">Rotina</a>
+      <a href="foco.html" class="nav-button active">Foco</a>
+      <a href="analises.html" class="nav-button">Análises</a>
+      <a href="estudos.html" class="nav-button">Estudos</a>
+      <a href="quadro.html" class="nav-button">Quadro</a>
+      <a href="fit.html" class="nav-button">FIT</a>
+      <a href="personalização.html" class="nav-button">Personalização</a>
+    </nav>
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content-area">
       <div class="content-primary">
-        <div class="card">
-          <h1>Foco Total</h1>
+        <div class="focus-card">
+
+          <h1 class="page-title">Foco Total</h1>
 
           <!-- ABAS -->
-          <div class="focus-tabs">
-            <button class="tab-btn active" data-mode="clock">Relógio</button>
-            <button class="tab-btn" data-mode="stopwatch">Cronômetro</button>
-            <button class="tab-btn" data-mode="timer">Timer</button>
-            <button class="tab-btn" data-mode="alarm">Alarme</button>
-          </div>
+          <nav class="focus-tabs" role="tablist" aria-label="Modos de foco">
+            <button class="tab-btn active" data-mode="clock" role="tab" aria-selected="true" id="tab-clock">Relógio</button>
+            <button class="tab-btn" data-mode="timer" role="tab" aria-selected="false" id="tab-timer">Timer</button>
+            <button class="tab-btn" data-mode="stopwatch" role="tab" aria-selected="false" id="tab-stopwatch">Cronômetro</button>
+            <button class="tab-btn" data-mode="alarm" role="tab" aria-selected="false" id="tab-alarm">Alarme</button>
+          </nav>
 
-          <!-- RELOGIO -->
-          <div id="clock-mode" class="mode active">
-            <div class="clock-display">--:--:--</div>
-          </div>
+          <!-- MODO RELÓGIO -->
+          <section id="clock-mode" class="mode active" role="tabpanel" aria-labelledby="tab-clock">
+            <div class="mode-container">
+              <h2 class="mode-title">RELÓGIO MUNDIAL</h2>
+              <div class="hero-display">
+                <span id="currentDate" class="date-label">-- DE ----, ----</span>
+                <h1 id="mainClock" class="big-number">00:00:00</h1>
+              </div>
+              <div class="world-grid">
+                <div class="world-card">
+                  <span class="city">NOVA YORK</span>
+                  <span id="time-ny" class="sub-time">00:00</span>
+                </div>
+                <div class="world-card">
+                  <span class="city">LONDRES</span>
+                  <span id="time-lon" class="sub-time">00:00</span>
+                </div>
+                <div class="world-card">
+                  <span class="city">TÓQUIO</span>
+                  <span id="time-tok" class="sub-time">00:00</span>
+                </div>
+              </div>
+            </div>
+          </section>
 
-          <!-- CRONÔMETRO -->
-          <div id="stopwatch-mode" class="mode">
-            <div class="clock-display">00:00:00</div>
-            <div class="stopwatch-controls">
-              <button id="startStopwatch">Iniciar</button>
-              <button id="pauseStopwatch">Pausar</button>
-              <button id="resetStopwatch">Zerar</button>
-            </div>
-          </div>
+          <!-- MODO TIMER -->
+          <section id="timer-mode" class="mode" role="tabpanel" aria-labelledby="tab-timer">
+            <div class="mode-container">
+              <h2 class="mode-title">TIMER DE FOCO</h2>
+              <div id="timer-setup" class="setup-grid">
+                <div class="input-box">
+                  <label for="t-hour">HORAS</label>
+                  <input type="number" id="t-hour" value="0" min="0" max="23">
+                </div>
+                <div class="input-box">
+                  <label for="t-min">MINUTOS</label>
+                  <input type="number" id="t-min" value="25" min="0" max="59">
+                </div>
+                <div class="input-box">
+                  <label for="t-sec">SEGUNDOS</label>
+                  <input type="number" id="t-sec" value="0" min="0" max="59">
+                </div>
+              </div>
 
-          <!-- TIMER POMODORO -->
-          <div id="timer-mode" class="mode">
-            <div class="timer-inputs">
-              <input type="number" id="timerMinutes" min="1" max="99" value="25"/> min
-              <input type="number" id="timerSeconds" min="0" max="59" value="0"/> seg
-              <button id="startTimer">Começar</button>
-            </div>
-            <div class="clock-display">25:00</div>
-            <div class="progress-bar-container">
-              <div class="progress-bar-fill"></div>
-            </div>
-          </div>
+              <div id="timer-active" class="active-display" style="display:none;">
+                <h1 id="timerDisplay" class="big-number">25:00</h1>
+                <div class="bar-bg">
+                  <div id="timerBar" class="bar-fill" style="width:100%;"></div>
+                </div>
+              </div>
 
-          <!-- ALARME -->
-          <div id="alarm-mode" class="mode">
-            <div class="alarm-input">
-              <input type="time" id="alarmTime"/>
-              <button id="setAlarm">Definir Alarme</button>
+              <div class="button-group">
+                <button type="button" id="btn-timer-start" class="btn-primary">INICIAR FOCO</button>
+                <button type="button" id="btn-timer-reset" class="btn-outline">REINICIAR</button>
+              </div>
             </div>
-            <div class="alarm-status">Nenhum alarme definido</div>
-          </div>
+          </section>
+
+          <!-- MODO CRONÔMETRO -->
+          <section id="stopwatch-mode" class="mode" role="tabpanel" aria-labelledby="tab-stopwatch">
+            <div class="mode-container">
+              <h2 class="mode-title">CRONÔMETRO</h2>
+              <h1 id="swDisplay" class="big-number">00:00<span class="ms">.00</span></h1>
+              <div class="button-group">
+                <button type="button" id="btn-sw-start" class="btn-primary">INICIAR</button>
+                <button type="button" id="btn-sw-lap" class="btn-outline" disabled>MARCAR VOLTA</button>
+                <button type="button" id="btn-sw-reset" class="btn-outline">ZERAR</button>
+              </div>
+              <div class="table-container">
+                <table class="laps-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>VOLTA</th>
+                      <th>TEMPO TOTAL</th>
+                    </tr>
+                  </thead>
+                  <tbody id="lapsList"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <!-- MODO ALARME -->
+          <section id="alarm-mode" class="mode" role="tabpanel" aria-labelledby="tab-alarm">
+            <div class="mode-container">
+              <h2 class="mode-title">ALARME</h2>
+              <div class="alarm-ui">
+                <div class="alarm-inputs">
+                  <input type="time" id="alarmInput" aria-label="Definir horário do alarme">
+                  <button type="button" id="btn-add-alarm" class="btn-primary">ADICIONAR</button>
+                </div>
+                <div id="alarmList" class="alarm-grid-list" aria-live="polite"></div>
+              </div>
+            </div>
+          </section>
+
         </div>
       </div>
     </main>
   </div>
 
-  <!-- FOOTER (igual todas as páginas) -->
+  <!-- FOOTER -->
   <footer>
     <p>© 2025 Loopr • Feito com amor e café</p>
   </footer>
