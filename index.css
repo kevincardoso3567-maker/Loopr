@@ -232,7 +232,6 @@ header {
     box-shadow: 0 0 10px rgba(var(--accent-color-rgb), 0.5); 
 }
 
-/* SETAS DO CALENDÁRIO */
 .calendar-nav-group {
     display: flex;
     gap: 0.5rem;
@@ -274,7 +273,7 @@ header {
 /* ========================================= */
 
 .task-list-container .card-title { 
-    font-size: 1.25rem;     font-weight: 500;     margin-bottom: 1rem;     color: var(--text-color); }
+    font-size: 1.25rem; font-weight: 500; margin-bottom: 1rem; color: var(--text-color); }
 
 .task-input-group { 
     display: flex; 
@@ -321,7 +320,6 @@ header {
     color: var(--sub-text-color); 
 }
 
-/* Contêiner das ações (check + X) */
 .task-actions {
     display: flex;
     align-items: center;
@@ -330,7 +328,6 @@ header {
     flex-shrink: 0;
 }
 
-/* Botões de ação */
 .task-toggle-img, .task-delete-img {
     background: none;
     border: none;
@@ -357,7 +354,6 @@ header {
     filter: drop-shadow(0 1px 2px rgba(0,0,0,0.35));
 }
 
-/* X SÓ APARECE NO MODO EDIÇÃO */
 .task-actions .task-delete-img {
     display: none !important;
 }
@@ -370,7 +366,6 @@ header {
     filter: drop-shadow(0 1px 2px rgba(255,0,0,0.45));
 }
 
-/* MODO EDIÇÃO */
 .task-item .edit-input {
     flex: 1;
     padding: 0.5rem;
@@ -398,7 +393,7 @@ header {
 .task-item .save-edit-btn:hover { opacity: 0.9; }
 
 /* ========================================= */
-/* PROGRESSO CIRCULAR — 100% RESPONSIVO */
+/* PROGRESSO CIRCULAR */
 /* ========================================= */
 
 .progress-card { 
@@ -492,7 +487,7 @@ footer {
 footer p { margin: 0; }
 
 /* ========================================= */
-/* RESPONSIVIDADE (CORREÇÃO DE ESPAÇAMENTO MOBILE) */
+/* RESPONSIVIDADE (FIX POSICIONAMENTO) */
 /* ========================================= */
 
 @media (max-width: 1200px) {
@@ -504,9 +499,9 @@ footer p { margin: 0; }
     .main-layout-wrapper { flex-direction: column; }
     
     .sidebar { 
-        width: 100%; 
-        margin: 0 0 1rem 0; 
-        border-radius: 0; 
+        width: 100% !important; 
+        margin: 0 0 1rem 0 !important; 
+        border-radius: 0 !important; 
         border: none !important;
         border-bottom: 1px solid white !important; 
         flex-direction: row; 
@@ -517,13 +512,16 @@ footer p { margin: 0; }
 
     .main-content-area { 
         grid-template-columns: 1fr; 
-        padding: 1.5rem 15px; /* Reduzi o padding lateral para o conteúdo respirar */
+        padding: 1.5rem 15px !important; 
         gap: 20px; 
-        max-width: 100%; 
+        max-width: 100% !important; 
+        width: 100% !important;
+        margin: 0 !important;
     }
 
     .content-primary, .content-secondary { 
         grid-column: 1 / -1; 
+        width: 100% !important;
     }
 
     .content-secondary { 
@@ -533,15 +531,15 @@ footer p { margin: 0; }
     }
 
     .progress-card {
-        width: 100%;
-        max-width: 100%; /* Permite ocupar a largura do card no mobile */
+        width: 100% !important;
+        max-width: 100% !important;
         margin: 0;
     }
 
     .sidebar .nav-button { 
         min-width: 110px; 
         padding: 1rem 0.5rem;
-        border-left: none; 
+        border-left: none !important; 
         border-bottom: 4px solid transparent; 
         text-align: center; 
         justify-content: center;
@@ -557,21 +555,20 @@ footer p { margin: 0; }
 
 @media (max-width: 650px) {
     .main-content-area { 
-        padding: 1rem 12px; /* Margens mínimas para telas pequenas */
+        padding: 1rem 12px !important; 
     }
     
     header { height: 70px; }
     
     .logo-image { height: 80px; margin-top: -15px; margin-bottom: -15px; }
 
-    /* Ajuste para o círculo não ficar gigante no celular */
     .progress-circle { width: 150px; height: 150px; margin: 1rem auto; }
     .progress-circle__value { font-size: 1.8rem; }
     .progress-card .metric-value-sm { font-size: 2rem; }
 }
 
 /* ========================================= */
-/* REMOVER SUBLINHADO DOS LINKS DA SIDEBAR */
+/* LINKS SIDEBAR */
 /* ========================================= */
 
 .sidebar a.nav-button,
@@ -582,12 +579,8 @@ footer p { margin: 0; }
 
 .sidebar a.nav-button:hover,
 .sidebar a.nav-button.active,
-.sidebar a.nav-button:focus,
-.sidebar a.nav-button:active,
 .sidebar .nav-button:hover,
-.sidebar .nav-button.active,
-.sidebar .nav-button:focus,
-.sidebar .nav-button:active {
+.sidebar .nav-button.active {
   text-decoration: none !important;
   outline: none;
 }
