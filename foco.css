@@ -1,6 +1,5 @@
 /* ========================================= */
-/* FOCO.CSS - Loopr • Foco Pro */
-/* Integrado com a Paleta Global e Sidebar */
+/* FOCO.CSS - Loopr • Foco Pro (Versão Final) */
 /* ========================================= */
 
 :root {
@@ -13,335 +12,281 @@
     --input-border: #374151;
     --accent-color-rgb: 0, 230, 230;
     --sidebar-width: 200px;
-    
-    /* Variáveis específicas do Foco baseadas na paleta */
     --primary-glow: rgba(0, 230, 230, 0.3);
 }
 
-/* 1. HEADER - AJUSTE DE ÍCONES (Sino e Perfil) */
-.user-info {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-}
+/* 1. LAYOUT & HEADER */
 
-.user-info button {
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
+header {
+    background-color: #08D5CB !important;
+    height: 80px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease;
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
-.user-info i {
-    font-size: 1.6rem;
-    color: #003b38; /* Cor escura para contrastar com o Header #08D5CB */
-    transition: color 0.2s;
-}
-
-.user-info button:hover i {
-    color: #000000;
-}
-
-.user-info button:hover {
-    transform: scale(1.15);
-}
-
-/* 2. Ajustes de Layout Específicos para a Área de Foco */
-.focus-card {
-    grid-column: span 12;
+.top-bar {
+    display: flex;
+    justify-content: flex-start; /* Alinha a logo à esquerda */
+    align-items: center;
+    padding: 0 2rem;
     width: 100%;
-    max-width: 1100px;
-    margin: 0 auto;
 }
 
-.page-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--text-color);
-    margin-bottom: 2rem;
-    text-align: left;
+.logo-image {
+    height: 140px;
+    width: auto;
+    margin-top: -30px;
+    margin-bottom: -30px;
+    filter: brightness(1) contrast(1.2);
 }
 
-/* 3. Abas de Navegação (Estilo Pílula Loopr) */
-.focus-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    background: var(--card-bg);
-    padding: 0.6rem;
-    border-radius: 999px;
-    border: 1px solid white;
-    margin-bottom: 3rem;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* Removido: .user-info e ícones de sino/perfil */
 
-.tab-btn {
-    padding: 0.8rem 1.8rem;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--sub-text-color);
-    font-weight: 600;
-    border: none;
-    cursor: pointer;
-    transition: 0.3s ease;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    letter-spacing: 1px;
-}
+.focus-card { grid-column: span 12; width: 100%; max-width: 1100px; margin: 0 auto; }
+.page-title { font-size: 2rem; font-weight: 700; color: var(--text-color); margin-bottom: 2rem; }
 
-.tab-btn:hover {
-    color: var(--text-color);
-    background: rgba(255, 255, 255, 0.05);
-}
+/* 2. ABAS (TABS) */
+.focus-tabs { display: flex; justify-content: center; gap: 0.5rem; background: var(--card-bg); padding: 0.6rem; border-radius: 999px; border: 1px solid rgba(255, 255, 255, 0.1); margin: 0 auto 3rem auto; width: fit-content; }
+.tab-btn { padding: 0.8rem 1.8rem; border-radius: 999px; background: transparent; color: var(--sub-text-color); font-weight: 600; border: none; cursor: pointer; transition: 0.3s ease; text-transform: uppercase; font-size: 0.85rem; }
+.tab-btn.active { background: var(--accent-color); color: var(--primary-bg); box-shadow: 0 4px 15px var(--primary-glow); }
 
-.tab-btn.active {
-    background: var(--accent-color);
-    color: var(--primary-bg);
-    box-shadow: 0 4px 15px var(--primary-glow);
-}
-
-/* 4. Containers de Modo (Cards) */
+/* 3. MODO CONTAINER */
 .mode { display: none; }
-.mode.active { 
-    display: block; 
-    animation: fadeInFoco 0.5s ease; 
+.mode.active { display: flex; flex-direction: column; animation: fadeInFoco 0.4s ease; }
+@keyframes fadeInFoco { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.mode-container { 
+    background-color: var(--card-bg); 
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px; 
+    padding: 3rem 2rem; 
+    text-align: center; 
+    min-height: 580px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+}
+.mode-title { font-size: 0.9rem; letter-spacing: 4px; color: var(--accent-color); margin-bottom: 1.5rem; text-transform: uppercase; font-weight: 700; }
+.big-number { font-size: clamp(4.5rem, 12vw, 8.5rem); font-weight: 800; color: var(--text-color); line-height: 1; margin: 1rem 0; font-variant-numeric: tabular-nums; }
+
+/* 4. TIMER - INPUTS E AJUSTES */
+.setup-grid { display: flex; justify-content: center; gap: 2rem; margin: 2rem 0; }
+.input-box { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+
+.input-box button { 
+    background: var(--input-bg) !important;
+    border: 1px solid var(--input-border) !important;
+    color: var(--accent-color) !important;
+    width: 50px !important;
+    height: 32px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    font-size: 1.4rem !important;
+    font-weight: bold !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: all 0.2s !important;
 }
 
-@keyframes fadeInFoco {
-    from { opacity: 0; transform: translateY(15px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-.mode-container {
-    background-color: var(--card-bg);
-    border: 1px solid white !important;
-    border-radius: 15px;
-    padding: 4rem 2rem;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-}
-
-.mode-title {
-    font-size: 1rem;
-    letter-spacing: 4px;
-    color: var(--accent-color);
-    margin-bottom: 2rem;
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-/* 5. Display Principal (Relógio e Timer) */
-.big-number {
-    font-size: clamp(4rem, 15vw, 9rem);
-    font-weight: 800;
-    color: var(--text-color);
-    line-height: 1;
-    margin: 2rem 0;
-    font-variant-numeric: tabular-nums;
-    text-shadow: 0 0 40px rgba(0, 230, 230, 0.2);
-}
-
-.date-label {
-    font-size: 1.1rem;
-    color: var(--sub-text-color);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* 6. Grid Relógio Mundial */
-.world-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1.5rem;
-    margin-top: 4rem;
-}
-
-.world-card {
-    background: var(--primary-bg);
-    padding: 2rem;
-    border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: 0.3s;
-}
-
-.world-card:hover {
-    border-color: var(--accent-color);
-    transform: translateY(-5px);
-}
-
-.city { 
-    display: block; 
-    font-size: 0.8rem; 
-    color: var(--sub-text-color); 
-    margin-bottom: 0.5rem; 
-    letter-spacing: 2px;
-}
-
-.sub-time { 
-    font-size: 2.5rem; 
-    font-weight: 700; 
-    color: var(--accent-color); 
-}
-
-/* 7. Inputs Circulares (Timer) */
-.setup-grid {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 3rem 0;
-}
-
-.input-box input {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: var(--primary-bg);
-    border: 2px solid var(--input-border);
-    color: var(--accent-color);
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    outline: none;
-    transition: 0.3s;
-    appearance: textfield; /* Remove setas padrão */
-}
-
-.input-box input::-webkit-inner-spin-button, 
-.input-box input::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-}
-
-.input-box input:focus {
-    border-color: var(--accent-color);
-    box-shadow: 0 0 20px var(--primary-glow);
+.input-box button:hover { 
+    background: var(--accent-color) !important; 
+    color: var(--primary-bg) !important; 
     transform: scale(1.05);
 }
 
-.input-box label {
-    display: block;
-    margin-top: 1rem;
-    font-size: 0.75rem;
-    color: var(--sub-text-color);
-    font-weight: 600;
+.input-box input { 
+    width: 110px; 
+    height: 110px; 
+    border-radius: 50%; 
+    background: var(--primary-bg); 
+    border: 2px solid var(--input-border); 
+    color: var(--accent-color); 
+    font-size: 2.2rem; 
+    font-weight: 700; 
+    text-align: center; 
+    outline: none; 
+    transition: 0.3s; 
+    -moz-appearance: textfield;
 }
+.input-box input::-webkit-inner-spin-button, 
+.input-box input::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
 
-/* 8. Barra de Progresso */
-.bar-bg {
-    width: 100%;
-    max-width: 600px;
-    height: 10px;
-    background: var(--primary-bg);
-    border-radius: 10px;
-    margin: 2rem auto;
-    overflow: hidden;
-    border: 1px solid var(--input-border);
-}
+.input-box input:focus { border-color: var(--accent-color); box-shadow: 0 0 15px var(--primary-glow); }
 
-.bar-fill {
-    height: 100%;
-    background: var(--accent-color);
-    box-shadow: 0 0 15px var(--primary-glow);
-    transition: width 0.5s linear;
-}
+/* 5. CRONÔMETRO - TABELA DE VOLTAS */
+.table-container { width: 100%; max-width: 500px; margin-top: 2rem; max-height: 200px; overflow-y: auto; }
+.laps-table { width: 100%; border-collapse: collapse; color: var(--text-color); }
+.laps-table th { color: var(--sub-text-color); font-size: 0.75rem; text-transform: uppercase; padding: 10px; border-bottom: 1px solid var(--input-border); }
+.laps-table td { padding: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); font-family: monospace; font-size: 1.1rem; }
+.laps-table tr:first-child td { color: var(--accent-color); font-weight: bold; }
 
-/* 9. Botões de Ação */
-.button-group {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-top: 3rem;
-}
-
-.btn-primary {
-    background-color: var(--accent-color);
-    color: var(--primary-bg);
-    padding: 1rem 2.5rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-primary:hover {
-    filter: brightness(1.1);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px var(--primary-glow);
-}
-
-.btn-outline {
-    background: transparent;
-    border: 1px solid var(--accent-color);
-    color: var(--accent-color);
-    padding: 1rem 2.5rem;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-outline:hover {
-    background: rgba(0, 230, 230, 0.1);
-}
-
-/* 10. Tabela de Voltas (Cronômetro) */
-.table-container {
-    margin-top: 3rem;
-    border-radius: 12px;
-    overflow: hidden;
-    border: 1px solid var(--input-border);
-    background: var(--primary-bg);
-}
-
-.laps-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.laps-table th {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
-    color: var(--sub-text-color);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-}
-
-.laps-table td {
-    padding: 1rem;
-    border-bottom: 1px solid var(--input-border);
-    font-family: monospace;
-}
-
-/* 11. Alarme UI */
-.alarm-inputs {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
+/* 6. ALARME - INPUT E LISTA */
+.alarm-setup-container { display: flex; gap: 10px; margin-bottom: 2rem; }
 
 #alarmInput {
-    background: var(--primary-bg);
-    border: 1px solid var(--accent-color);
-    color: white;
-    padding: 0.8rem 1.5rem;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    outline: none;
+    background: var(--input-bg) !important;
+    border: 2px solid var(--input-border) !important;
+    color: var(--accent-color) !important;
+    padding: 12px 20px !important;
+    border-radius: 12px !important;
+    font-size: 1.2rem !important;
+    outline: none !important;
+    color-scheme: dark;
 }
 
-/* Ajustes Responsivos para o Foco */
-@media (max-width: 1024px) {
-    .mode-container { padding: 2.5rem 1rem; }
-    .big-number { font-size: 5rem; }
-    .setup-grid { gap: 1rem; }
-    .input-box input { width: 90px; height: 90px; font-size: 1.8rem; }
+.alarm-grid-list { width: 100%; max-width: 500px; }
+.alarm-item { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    background: var(--primary-bg); 
+    padding: 1rem 1.5rem; 
+    border-radius: 12px; 
+    margin-bottom: 0.8rem; 
+    border: 1px solid var(--input-border); 
+}
+.alarm-time { font-size: 1.6rem; font-weight: 700; color: var(--accent-color); }
+
+/* 7. BARRA DE PROGRESSO */
+.bar-bg { width: 100%; max-width: 500px; height: 10px; background: var(--primary-bg); border-radius: 10px; margin: 2rem auto 0 auto; overflow: hidden; border: 1px solid var(--input-border); }
+.bar-fill { height: 100%; width: 100%; background: var(--accent-color); box-shadow: 0 0 15px var(--accent-color); transition: width 0.2s linear; }
+
+/* 8. BOTÕES GERAIS */
+.button-group { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; width: 100%; }
+.btn-primary, .btn-outline { padding: 0.9rem 2rem; border-radius: 10px; font-weight: 700; cursor: pointer; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
+.btn-primary { background: var(--accent-color); color: var(--primary-bg); border: none; }
+.btn-outline { background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); }
+.btn-outline:hover:not(:disabled) { background: rgba(0, 230, 230, 0.1); }
+.btn-outline:disabled { opacity: 0.3; cursor: not-allowed; border-color: var(--sub-text-color); color: var(--sub-text-color); }
+
+/* 9. RELÓGIO MUNDIAL */
+.world-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; margin-top: 3rem; width: 100%; }
+.world-card { background: var(--primary-bg); padding: 1.5rem; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s; }
+.world-card:hover { border-color: var(--accent-color); transform: translateY(-5px); }
+.city { display: block; font-size: 0.75rem; color: var(--sub-text-color); margin-bottom: 0.5rem; letter-spacing: 2px; }
+.sub-time { font-size: 1.8rem; font-weight: 700; color: var(--accent-color); }
+
+/* LIMPEZA DE LIXO VISUAL */
+#swTotal, .total-time-display { display: none !important; }
+
+/* ========================================= */
+/* 10. ADICIONADO: CAMADA DE RESPONSIVIDADE  */
+/* ========================================= */
+
+@media (max-width: 850px) {
+    /* Ajuste da Estrutura Sidebar/Main */
+    .main-layout-wrapper {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        padding: 10px;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        gap: 10px;
+        justify-content: flex-start;
+    }
+
+    .nav-button {
+        white-space: nowrap;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
+    }
+
+    .main-content-area {
+        margin-left: 0;
+        padding: 20px 15px;
+    }
+
+    /* Ajuste do Header */
+    .top-bar {
+        padding: 0 1rem;
+    }
+
+    .logo-image {
+        height: 100px;
+    }
+
+    /* Abas de Foco */
+    .focus-tabs {
+        width: 100%;
+        flex-wrap: wrap;
+        border-radius: 15px;
+        padding: 5px;
+    }
+
+    .tab-btn {
+        flex: 1 1 45%;
+        padding: 0.6rem;
+        font-size: 0.75rem;
+    }
+
+    /* Timer Setup - Crucial para não quebrar os círculos */
+    .setup-grid {
+        gap: 0.8rem;
+        flex-wrap: nowrap; /* Mantém na mesma linha */
+    }
+
+    .input-box input {
+        width: 75px;
+        height: 75px;
+        font-size: 1.4rem;
+    }
+
+    .input-box button {
+        width: 40px !important;
+        height: 30px !important;
+    }
+
+    /* Botões de Ação */
+    .button-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .btn-primary, .btn-outline {
+        width: 100%;
+        padding: 1rem;
+    }
+
+    /* Relógio Mundial e Alarme */
+    .world-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .alarm-setup-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    #alarmInput {
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .big-number {
+        font-size: 3.5rem;
+    }
+
+    .input-box input {
+        width: 65px;
+        height: 65px;
+        font-size: 1.2rem;
+    }
+
+    .mode-container {
+        padding: 1.5rem 1rem;
+    }
 }
