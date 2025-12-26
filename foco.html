@@ -11,26 +11,16 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header>
     <div class="top-bar">
       <div class="logo">
         <img src="LOGO-TEXTO.png" alt="Loopr • Foco" class="logo-image">
       </div>
-      <div class="user-info">
-        <button type="button" aria-label="Notificações">
-          <i class="fas fa-bell"></i>
-        </button>
-        <button type="button" aria-label="Perfil">
-          <i class="fas fa-user"></i>
-        </button>
       </div>
-    </div>
   </header>
 
   <div class="main-layout-wrapper">
 
-    <!-- SIDEBAR -->
     <nav class="sidebar">
       <a href="index.html" class="nav-button">Rotina</a>
       <a href="foco.html" class="nav-button active">Foco</a>
@@ -41,14 +31,12 @@
       <a href="personalização.html" class="nav-button">Personalização</a>
     </nav>
 
-    <!-- CONTEÚDO PRINCIPAL -->
     <main class="main-content-area">
       <div class="content-primary">
         <div class="focus-card">
 
           <h1 class="page-title">Foco Total</h1>
 
-          <!-- ABAS -->
           <nav class="focus-tabs" role="tablist" aria-label="Modos de foco">
             <button class="tab-btn active" data-mode="clock" role="tab" aria-selected="true" id="tab-clock">Relógio</button>
             <button class="tab-btn" data-mode="timer" role="tab" aria-selected="false" id="tab-timer">Timer</button>
@@ -56,7 +44,6 @@
             <button class="tab-btn" data-mode="alarm" role="tab" aria-selected="false" id="tab-alarm">Alarme</button>
           </nav>
 
-          <!-- MODO RELÓGIO -->
           <section id="clock-mode" class="mode active" role="tabpanel" aria-labelledby="tab-clock">
             <div class="mode-container">
               <h2 class="mode-title">RELÓGIO MUNDIAL</h2>
@@ -81,27 +68,32 @@
             </div>
           </section>
 
-          <!-- MODO TIMER -->
           <section id="timer-mode" class="mode" role="tabpanel" aria-labelledby="tab-timer">
             <div class="mode-container">
               <h2 class="mode-title">TIMER DE FOCO</h2>
               <div id="timer-setup" class="setup-grid">
                 <div class="input-box">
+                  <button type="button" onclick="adjustTime('t-hour', 1)">+</button>
                   <label for="t-hour">HORAS</label>
                   <input type="number" id="t-hour" value="0" min="0" max="23">
+                  <button type="button" onclick="adjustTime('t-hour', -1)">-</button>
                 </div>
                 <div class="input-box">
+                  <button type="button" onclick="adjustTime('t-min', 1)">+</button>
                   <label for="t-min">MINUTOS</label>
-                  <input type="number" id="t-min" value="25" min="0" max="59">
+                  <input type="number" id="t-min" value="0" min="0" max="59">
+                  <button type="button" onclick="adjustTime('t-min', -1)">-</button>
                 </div>
                 <div class="input-box">
+                  <button type="button" onclick="adjustTime('t-sec', 1)">+</button>
                   <label for="t-sec">SEGUNDOS</label>
                   <input type="number" id="t-sec" value="0" min="0" max="59">
+                  <button type="button" onclick="adjustTime('t-sec', -1)">-</button>
                 </div>
               </div>
 
               <div id="timer-active" class="active-display" style="display:none;">
-                <h1 id="timerDisplay" class="big-number">25:00</h1>
+                <h1 id="timerDisplay" class="big-number">00:00</h1>
                 <div class="bar-bg">
                   <div id="timerBar" class="bar-fill" style="width:100%;"></div>
                 </div>
@@ -114,7 +106,6 @@
             </div>
           </section>
 
-          <!-- MODO CRONÔMETRO -->
           <section id="stopwatch-mode" class="mode" role="tabpanel" aria-labelledby="tab-stopwatch">
             <div class="mode-container">
               <h2 class="mode-title">CRONÔMETRO</h2>
@@ -124,31 +115,19 @@
                 <button type="button" id="btn-sw-lap" class="btn-outline" disabled>MARCAR VOLTA</button>
                 <button type="button" id="btn-sw-reset" class="btn-outline">ZERAR</button>
               </div>
-              <div class="table-container">
-                <table class="laps-table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>VOLTA</th>
-                      <th>TEMPO TOTAL</th>
-                    </tr>
-                  </thead>
-                  <tbody id="lapsList"></tbody>
-                </table>
-              </div>
             </div>
           </section>
 
-          <!-- MODO ALARME -->
           <section id="alarm-mode" class="mode" role="tabpanel" aria-labelledby="tab-alarm">
             <div class="mode-container">
               <h2 class="mode-title">ALARME</h2>
               <div class="alarm-ui">
-                <div class="alarm-inputs">
+                <div class="alarm-setup-container">
                   <input type="time" id="alarmInput" aria-label="Definir horário do alarme">
                   <button type="button" id="btn-add-alarm" class="btn-primary">ADICIONAR</button>
                 </div>
                 <div id="alarmList" class="alarm-grid-list" aria-live="polite"></div>
+                <p id="no-alarms" style="color: var(--sub-text-color); margin-top: 1rem;">Nenhum alarme configurado</p>
               </div>
             </div>
           </section>
@@ -158,7 +137,6 @@
     </main>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <p>© 2025 Loopr • Feito com amor e café</p>
   </footer>
