@@ -492,7 +492,7 @@ footer {
 footer p { margin: 0; }
 
 /* ========================================= */
-/* RESPONSIVIDADE CORRIGIDA */
+/* RESPONSIVIDADE (CORREÇÃO DE ESPAÇAMENTO MOBILE) */
 /* ========================================= */
 
 @media (max-width: 1200px) {
@@ -506,8 +506,9 @@ footer p { margin: 0; }
     .sidebar { 
         width: 100%; 
         margin: 0 0 1rem 0; 
-        border-radius: 15px; 
-        border: 1px solid white !important; 
+        border-radius: 0; 
+        border: none !important;
+        border-bottom: 1px solid white !important; 
         flex-direction: row; 
         overflow-x: auto;
         height: auto;
@@ -516,8 +517,8 @@ footer p { margin: 0; }
 
     .main-content-area { 
         grid-template-columns: 1fr; 
-        padding: 1.5rem 24px; 
-        gap: 24px; 
+        padding: 1.5rem 15px; /* Reduzi o padding lateral para o conteúdo respirar */
+        gap: 20px; 
         max-width: 100%; 
     }
 
@@ -525,21 +526,21 @@ footer p { margin: 0; }
         grid-column: 1 / -1; 
     }
 
-    /* Ajuste do Progresso Diário para não quebrar o layout */
     .content-secondary { 
-        margin-top: 1.5rem; 
+        margin-top: 0; 
         display: flex;
-        justify-content: center; /* Centraliza o card de progresso no mobile */
+        justify-content: center; 
     }
 
     .progress-card {
         width: 100%;
-        max-width: 450px; /* Impede o card de crescer demais em tablets */
-        margin: 0 auto;
+        max-width: 100%; /* Permite ocupar a largura do card no mobile */
+        margin: 0;
     }
 
     .sidebar .nav-button { 
-        min-width: 120px; 
+        min-width: 110px; 
+        padding: 1rem 0.5rem;
         border-left: none; 
         border-bottom: 4px solid transparent; 
         text-align: center; 
@@ -550,22 +551,23 @@ footer p { margin: 0; }
     
     .logo-image { height: 100px; margin-top: -20px; margin-bottom: -20px; }
     
-    .progress-circle { width: 180px; height: 180px; }
-    .progress-circle__value { font-size: 2.5rem; }
-    .progress-card .metric-value-sm { font-size: 2.6rem; }
+    .progress-circle { width: 170px; height: 170px; }
+    .progress-circle__value { font-size: 2.2rem; }
 }
 
 @media (max-width: 650px) {
-    .main-content-area { padding: 1rem; }
-    header { height: 70px; }
-    .logo-image { height: 80px; margin-top: -15px; margin-bottom: -15px; }
+    .main-content-area { 
+        padding: 1rem 12px; /* Margens mínimas para telas pequenas */
+    }
     
-    .progress-card { padding: 1.8rem 1.2rem; }
-    .progress-circle { width: 140px; height: 140px; margin: 1rem auto; }
-    .progress-circle__value { font-size: 1.9rem; }
-    .progress-card .metric-value-sm { font-size: 2.2rem; }
-    .progress-card .card-title { font-size: 1.3rem; }
-    .progress-card .card-subtitle { font-size: 1rem; }
+    header { height: 70px; }
+    
+    .logo-image { height: 80px; margin-top: -15px; margin-bottom: -15px; }
+
+    /* Ajuste para o círculo não ficar gigante no celular */
+    .progress-circle { width: 150px; height: 150px; margin: 1rem auto; }
+    .progress-circle__value { font-size: 1.8rem; }
+    .progress-card .metric-value-sm { font-size: 2rem; }
 }
 
 /* ========================================= */
