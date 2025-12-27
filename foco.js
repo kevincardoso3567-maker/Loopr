@@ -1,4 +1,6 @@
-// foco.js - Loopr • Foco Pro (Versão Final Corrigida e Premium)
+/* ========================================= */
+/* foco.js - Loopr • Foco Pro (Versão Final) */
+/* ========================================= */
 
 const state = {
     timer: {
@@ -18,9 +20,8 @@ const state = {
     alarms: JSON.parse(localStorage.getItem('loopr_alarms') || '[]')
 };
 
-// Som de notificação suave (funciona sem arquivo externo)
-const notificationSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAA');
-
+// Som de notificação suave
+const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
 
 // ======================== NAVEGAÇÃO POR ABAS ========================
 document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -34,27 +35,26 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
     });
 });
 
-
 // ======================== RELÓGIO MUNDIAL ========================
 function updateClock() {
     const now = new Date();
 
-    // Horário principal
-    document.getElementById('mainClock').textContent = now.toLocaleTimeString('pt-BR', {
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
+    const mainClockEl = document.getElementById('mainClock');
+    if (mainClockEl) {
+        mainClockEl.textContent = now.toLocaleTimeString('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+    }
 
-    // Data
-    document.getElementById('currentDate').textContent = now.toLocaleDateString('pt-BR', {
-        weekday: 'long',
-        day: 'numeric',
-        month: 'long',
-        year: 'numeric'
-    }).replace(/^\w/, c => c.toUpperCase());
+    const dateEl = document.getElementById('currentDate');
+    if (dateEl) {
+        dateEl.textContent = now.toLocaleDateString('pt-BR', {
+            weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+        }).replace(/^\w/, c => c.toUpperCase());
+    }
 
-    // Horários mundiais
     const zones = {
         'time-ny': 'America/New_York',
         'time-lon': 'Europe/London',
@@ -62,20 +62,20 @@ function updateClock() {
     };
 
     Object.keys(zones).forEach(id => {
-        const time = now.toLocaleTimeString('pt-BR', {
-            timeZone: zones[id],
-            hour: '2-digit',
-            minute: '2-digit'
-        });
-        document.getElementById(id).textContent = time;
+        const el = document.getElementById(id);
+        if (el) {
+            el.textContent = now.toLocaleTimeString('pt-BR', {
+                timeZone: zones[id],
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
     });
 
     checkAlarms(now);
 }
-
 setInterval(updateClock, 1000);
 updateClock();
-
 
 // ======================== TIMER DE FOCO ========================
 const timerDisplay = document.getElementById('timerDisplay');
@@ -85,16 +85,26 @@ const timerActive = document.getElementById('timer-active');
 const btnTimerStart = document.getElementById('btn-timer-start');
 const btnTimerReset = document.getElementById('btn-timer-reset');
 
+// FUNÇÃO PARA OS BOTÕES + E -
+window.adjustTime = function(inputId, amount) {
+    const input = document.getElementById(inputId);
+    let newVal = parseInt(input.value) + amount;
+    
+    // Travas de segurança
+    if (inputId === 't-hour' && (newVal < 0 || newVal > 23)) return;
+    if ((inputId === 't-min' || inputId === 't-sec') && (newVal < 0 || newVal > 59)) return;
+    
+    input.value = newVal;
+};
+
 btnTimerStart.addEventListener('click', () => {
     if (state.timer.running && !state.timer.paused) {
-        // Pausar
         clearInterval(state.timer.interval);
         state.timer.paused = true;
         btnTimerStart.textContent = 'CONTINUAR';
         return;
     }
 
-    // Iniciar ou continuar
     if (state.timer.remaining === 0) {
         const h = parseInt(document.getElementById('t-hour').value) || 0;
         const m = parseInt(document.getElementById('t-min').value) || 0;
@@ -109,7 +119,8 @@ btnTimerStart.addEventListener('click', () => {
     }
 
     timerSetup.style.display = 'none';
-    timerActive.style.display = 'block';
+    timerActive.style.display = 'flex'; 
+    
     state.timer.running = true;
     state.timer.paused = false;
     btnTimerStart.textContent = 'PAUSAR';
@@ -122,7 +133,9 @@ btnTimerStart.addEventListener('click', () => {
         const s = state.timer.remaining % 60;
 
         timerDisplay.textContent = `${h > 0 ? h + ':' : ''}${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        timerBar.style.width = `${(state.timer.remaining / state.timer.total) * 100}%`;
+        
+        const percent = (state.timer.remaining / state.timer.total) * 100;
+        timerBar.style.width = `${percent}%`;
 
         if (state.timer.remaining <= 0) {
             clearInterval(state.timer.interval);
@@ -138,7 +151,7 @@ btnTimerReset.addEventListener('click', () => {
     clearInterval(state.timer.interval);
     state.timer = { remaining: 0, total: 0, running: false, paused: false, interval: null };
 
-    timerSetup.style.display = 'grid';
+    timerSetup.style.display = 'flex';
     timerActive.style.display = 'none';
     btnTimerStart.textContent = 'INICIAR FOCO';
 
@@ -148,7 +161,6 @@ btnTimerReset.addEventListener('click', () => {
     timerDisplay.textContent = '25:00';
     timerBar.style.width = '100%';
 });
-
 
 // ======================== CRONÔMETRO ========================
 const swDisplay = document.getElementById('swDisplay');
@@ -200,7 +212,6 @@ btnSwLap.addEventListener('click', () => {
     row.innerHTML = `
         <td>#${lapsList.children.length + 1}</td>
         <td>${formatTime(lapTime)}</td>
-        <td>${formatTime(total)}</td>
     `;
     lapsList.prepend(row);
 });
@@ -214,13 +225,12 @@ btnSwReset.addEventListener('click', () => {
     lapsList.innerHTML = '';
 });
 
-
 // ======================== ALARME ========================
 const alarmInput = document.getElementById('alarmInput');
 const alarmList = document.getElementById('alarmList');
+const noAlarmsMsg = document.getElementById('no-alarms');
 
 document.getElementById('btn-add-alarm').addEventListener('click', addAlarm);
-alarmInput.addEventListener('keydown', e => e.key === 'Enter' && addAlarm());
 
 function addAlarm() {
     const time = alarmInput.value.trim();
@@ -238,36 +248,40 @@ function addAlarm() {
     renderAlarms();
 }
 
-function removeAlarm(id) {
+window.removeAlarm = function(id) {
     state.alarms = state.alarms.filter(a => a.id !== id);
     localStorage.setItem('loopr_alarms', JSON.stringify(state.alarms));
     renderAlarms();
-}
+};
 
-function toggleAlarm(id) {
+window.toggleAlarm = function(id) {
     state.alarms = state.alarms.map(a => 
         a.id === id ? { ...a, active: !a.active } : a
     );
     localStorage.setItem('loopr_alarms', JSON.stringify(state.alarms));
     renderAlarms();
-}
+};
 
 function renderAlarms() {
+    if (!alarmList) return;
+    
     if (state.alarms.length === 0) {
-        alarmList.innerHTML = '<p style="color: var(--text-muted); opacity: 0.8;">Nenhum alarme configurado</p>';
+        alarmList.innerHTML = '';
+        noAlarmsMsg.style.display = 'block';
         return;
     }
 
+    noAlarmsMsg.style.display = 'none';
     alarmList.innerHTML = state.alarms
         .sort((a, b) => a.time.localeCompare(b.time))
         .map(alarm => `
             <div class="alarm-item">
                 <span class="alarm-time">${alarm.time}</span>
                 <div class="alarm-actions">
-                    <button onclick="toggleAlarm(${alarm.id})" class="alarm-toggle" aria-label="${alarm.active ? 'Desativar' : 'Ativar'} alarme">
+                    <button onclick="toggleAlarm(${alarm.id})" class="alarm-toggle">
                         <i class="fas fa-bell${alarm.active ? '' : '-slash'}"></i>
                     </button>
-                    <button onclick="removeAlarm(${alarm.id})" class="alarm-delete" aria-label="Remover alarme">×</button>
+                    <button onclick="removeAlarm(${alarm.id})" class="alarm-delete">×</button>
                 </div>
             </div>
         `).join('');
@@ -277,10 +291,10 @@ function checkAlarms(now) {
     const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
 
     state.alarms.forEach(alarm => {
-        if (alarm.active && alarm.time === currentTime && now.getSeconds() < 5) {
+        if (alarm.active && alarm.time === currentTime && now.getSeconds() === 0) {
             notificationSound.play();
             alert(`⏰ Alarme disparado: ${alarm.time}`);
-            alarm.active = false; // Desativa após tocar
+            alarm.active = false; 
             renderAlarms();
         }
     });
