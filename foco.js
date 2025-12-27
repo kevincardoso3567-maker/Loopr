@@ -20,7 +20,6 @@ const state = {
     alarms: JSON.parse(localStorage.getItem('loopr_alarms') || '[]')
 };
 
-// Som de notificação suave
 const notificationSound = new Audio('https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3');
 
 // ======================== NAVEGAÇÃO POR ABAS ========================
@@ -38,13 +37,10 @@ document.querySelectorAll('.tab-btn').forEach(btn => {
 // ======================== RELÓGIO MUNDIAL ========================
 function updateClock() {
     const now = new Date();
-
     const mainClockEl = document.getElementById('mainClock');
     if (mainClockEl) {
         mainClockEl.textContent = now.toLocaleTimeString('pt-BR', {
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit'
+            hour: '2-digit', minute: '2-digit', second: '2-digit'
         });
     }
 
@@ -55,23 +51,15 @@ function updateClock() {
         }).replace(/^\w/, c => c.toUpperCase());
     }
 
-    const zones = {
-        'time-ny': 'America/New_York',
-        'time-lon': 'Europe/London',
-        'time-tok': 'Asia/Tokyo'
-    };
-
+    const zones = { 'time-ny': 'America/New_York', 'time-lon': 'Europe/London', 'time-tok': 'Asia/Tokyo' };
     Object.keys(zones).forEach(id => {
         const el = document.getElementById(id);
         if (el) {
             el.textContent = now.toLocaleTimeString('pt-BR', {
-                timeZone: zones[id],
-                hour: '2-digit',
-                minute: '2-digit'
+                timeZone: zones[id], hour: '2-digit', minute: '2-digit'
             });
         }
     });
-
     checkAlarms(now);
 }
 setInterval(updateClock, 1000);
@@ -85,15 +73,11 @@ const timerActive = document.getElementById('timer-active');
 const btnTimerStart = document.getElementById('btn-timer-start');
 const btnTimerReset = document.getElementById('btn-timer-reset');
 
-// FUNÇÃO PARA OS BOTÕES + E -
 window.adjustTime = function(inputId, amount) {
     const input = document.getElementById(inputId);
     let newVal = parseInt(input.value) + amount;
-    
-    // Travas de segurança
     if (inputId === 't-hour' && (newVal < 0 || newVal > 23)) return;
     if ((inputId === 't-min' || inputId === 't-sec') && (newVal < 0 || newVal > 59)) return;
-    
     input.value = newVal;
 };
 
@@ -120,20 +104,17 @@ btnTimerStart.addEventListener('click', () => {
 
     timerSetup.style.display = 'none';
     timerActive.style.display = 'flex'; 
-    
     state.timer.running = true;
     state.timer.paused = false;
     btnTimerStart.textContent = 'PAUSAR';
 
     state.timer.interval = setInterval(() => {
         state.timer.remaining--;
-
         const h = Math.floor(state.timer.remaining / 3600);
         const m = Math.floor((state.timer.remaining % 3600) / 60);
         const s = state.timer.remaining % 60;
 
         timerDisplay.textContent = `${h > 0 ? h + ':' : ''}${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-        
         const percent = (state.timer.remaining / state.timer.total) * 100;
         timerBar.style.width = `${percent}%`;
 
@@ -141,25 +122,22 @@ btnTimerStart.addEventListener('click', () => {
             clearInterval(state.timer.interval);
             state.timer.running = false;
             notificationSound.play();
-            alert('Foco concluído! Hora de descansar 💪');
+            alert('Foco concluído! 💪');
             btnTimerReset.click();
         }
     }, 1000);
 });
 
-// AQUI FOI A ALTERAÇÃO: Valores de reinicialização alterados para 0
 btnTimerReset.addEventListener('click', () => {
     clearInterval(state.timer.interval);
     state.timer = { remaining: 0, total: 0, running: false, paused: false, interval: null };
-
     timerSetup.style.display = 'flex';
     timerActive.style.display = 'none';
     btnTimerStart.textContent = 'INICIAR FOCO';
-
     document.getElementById('t-hour').value = 0;
-    document.getElementById('t-min').value = 0; // Alterado de 25 para 0
+    document.getElementById('t-min').value = 0; 
     document.getElementById('t-sec').value = 0;
-    timerDisplay.textContent = '00:00'; // Alterado de 25:00 para 00:00
+    timerDisplay.textContent = '00:00';
     timerBar.style.width = '100%';
 });
 
@@ -168,7 +146,7 @@ const swDisplay = document.getElementById('swDisplay');
 const btnSwStart = document.getElementById('btn-sw-start');
 const btnSwLap = document.getElementById('btn-sw-lap');
 const btnSwReset = document.getElementById('btn-sw-reset');
-const lapsList = document.getElementById('lapsList');
+let lapsList = document.getElementById('lapsList');
 
 btnSwStart.addEventListener('click', () => {
     if (!state.stopwatch.running) {
@@ -196,13 +174,13 @@ function updateStopwatchDisplay() {
 }
 
 btnSwLap.addEventListener('click', () => {
-    if (!state.stopwatch.running) return;
+    if (!state.stopwatch.running || !lapsList) return;
 
-    const total = state.stopwatch.elapsed;
-    const lapTime = total - state.stopwatch.lastLap;
-    state.stopwatch.lastLap = total;
+    const totalNow = state.stopwatch.elapsed;
+    const lapDiff = totalNow - state.stopwatch.lastLap;
+    state.stopwatch.lastLap = totalNow;
 
-    const formatTime = (ms) => {
+    const format = (ms) => {
         const m = Math.floor(ms / 60000).toString().padStart(2, '0');
         const s = Math.floor((ms % 60000) / 1000).toString().padStart(2, '0');
         const cs = Math.floor((ms % 1000) / 10).toString().padStart(2, '0');
@@ -210,9 +188,11 @@ btnSwLap.addEventListener('click', () => {
     };
 
     const row = document.createElement('tr');
+    row.style.borderBottom = "1px solid rgba(255,255,255,0.05)";
     row.innerHTML = `
-        <td>#${lapsList.children.length + 1}</td>
-        <td>${formatTime(lapTime)}</td>
+        <td style="padding: 12px 8px; color: var(--sub-text-color);">Volta ${lapsList.children.length + 1}</td>
+        <td style="padding: 12px 8px; font-family: monospace;">+${format(lapDiff)}</td>
+        <td style="padding: 12px 8px; text-align: right; font-family: monospace; font-weight: bold;">${format(totalNow)}</td>
     `;
     lapsList.prepend(row);
 });
@@ -223,7 +203,7 @@ btnSwReset.addEventListener('click', () => {
     swDisplay.innerHTML = '00:00<span class="ms">.00</span>';
     btnSwStart.textContent = 'INICIAR';
     btnSwLap.disabled = true;
-    lapsList.innerHTML = '';
+    if (lapsList) lapsList.innerHTML = '';
 });
 
 // ======================== ALARME ========================
@@ -236,13 +216,7 @@ document.getElementById('btn-add-alarm').addEventListener('click', addAlarm);
 function addAlarm() {
     const time = alarmInput.value.trim();
     if (!time) return;
-
-    const alarm = {
-        id: Date.now(),
-        time,
-        active: true
-    };
-
+    const alarm = { id: Date.now(), time, active: true };
     state.alarms.push(alarm);
     localStorage.setItem('loopr_alarms', JSON.stringify(state.alarms));
     alarmInput.value = '';
@@ -256,23 +230,19 @@ window.removeAlarm = function(id) {
 };
 
 window.toggleAlarm = function(id) {
-    state.alarms = state.alarms.map(a => 
-        a.id === id ? { ...a, active: !a.active } : a
-    );
+    state.alarms = state.alarms.map(a => a.id === id ? { ...a, active: !a.active } : a);
     localStorage.setItem('loopr_alarms', JSON.stringify(state.alarms));
     renderAlarms();
 };
 
 function renderAlarms() {
     if (!alarmList) return;
-    
     if (state.alarms.length === 0) {
         alarmList.innerHTML = '';
-        noAlarmsMsg.style.display = 'block';
+        if(noAlarmsMsg) noAlarmsMsg.style.display = 'block';
         return;
     }
-
-    noAlarmsMsg.style.display = 'none';
+    if(noAlarmsMsg) noAlarmsMsg.style.display = 'none';
     alarmList.innerHTML = state.alarms
         .sort((a, b) => a.time.localeCompare(b.time))
         .map(alarm => `
@@ -290,7 +260,6 @@ function renderAlarms() {
 
 function checkAlarms(now) {
     const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
-
     state.alarms.forEach(alarm => {
         if (alarm.active && alarm.time === currentTime && now.getSeconds() === 0) {
             notificationSound.play();
