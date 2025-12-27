@@ -147,6 +147,7 @@ btnTimerStart.addEventListener('click', () => {
     }, 1000);
 });
 
+// AQUI FOI A ALTERAÇÃO: Valores de reinicialização alterados para 0
 btnTimerReset.addEventListener('click', () => {
     clearInterval(state.timer.interval);
     state.timer = { remaining: 0, total: 0, running: false, paused: false, interval: null };
@@ -156,9 +157,9 @@ btnTimerReset.addEventListener('click', () => {
     btnTimerStart.textContent = 'INICIAR FOCO';
 
     document.getElementById('t-hour').value = 0;
-    document.getElementById('t-min').value = 25;
+    document.getElementById('t-min').value = 0; // Alterado de 25 para 0
     document.getElementById('t-sec').value = 0;
-    timerDisplay.textContent = '25:00';
+    timerDisplay.textContent = '00:00'; // Alterado de 25:00 para 00:00
     timerBar.style.width = '100%';
 });
 
