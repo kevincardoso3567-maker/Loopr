@@ -179,114 +179,100 @@ header {
 /* ========================================= */
 
 @media (max-width: 850px) {
-    /* Ajuste da Estrutura Sidebar/Main */
-    .main-layout-wrapper {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .sidebar {
-        width: 100%;
-        height: auto;
-        flex-direction: row;
-        overflow-x: auto;
-        padding: 10px;
-        position: static;
-        border-right: none;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-        gap: 10px;
-        justify-content: flex-start;
-    }
-
-    .nav-button {
-        white-space: nowrap;
-        padding: 0.8rem 1.2rem;
-        font-size: 0.9rem;
-    }
-
-    .main-content-area {
-        margin-left: 0;
-        padding: 20px 15px;
-    }
-
-    /* Ajuste do Header */
-    .top-bar {
-        padding: 0 1rem;
-    }
-
-    .logo-image {
-        height: 100px;
-    }
-
-    /* Abas de Foco */
-    .focus-tabs {
-        width: 100%;
-        flex-wrap: wrap;
-        border-radius: 15px;
-        padding: 5px;
-    }
-
-    .tab-btn {
-        flex: 1 1 45%;
-        padding: 0.6rem;
-        font-size: 0.75rem;
-    }
-
-    /* Timer Setup - Crucial para não quebrar os círculos */
-    .setup-grid {
-        gap: 0.8rem;
-        flex-wrap: nowrap; /* Mantém na mesma linha */
-    }
-
-    .input-box input {
-        width: 75px;
-        height: 75px;
-        font-size: 1.4rem;
-    }
-
-    .input-box button {
-        width: 40px !important;
-        height: 30px !important;
-    }
-
-    /* Botões de Ação */
-    .button-group {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .btn-primary, .btn-outline {
-        width: 100%;
-        padding: 1rem;
-    }
-
-    /* Relógio Mundial e Alarme */
-    .world-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .alarm-setup-container {
-        flex-direction: column;
-        width: 100%;
-    }
-
-    #alarmInput {
-        width: 100% !important;
-    }
+    .main-layout-wrapper { display: flex; flex-direction: column; }
+    .sidebar { width: 100%; height: auto; flex-direction: row; overflow-x: auto; padding: 10px; position: static; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.1); gap: 10px; justify-content: flex-start; }
+    .nav-button { white-space: nowrap; padding: 0.8rem 1.2rem; font-size: 0.9rem; }
+    .main-content-area { margin-left: 0; padding: 20px 15px; }
+    .top-bar { padding: 0 1rem; }
+    .logo-image { height: 100px; }
+    .focus-tabs { width: 100%; flex-wrap: wrap; border-radius: 15px; padding: 5px; }
+    .tab-btn { flex: 1 1 45%; padding: 0.6rem; font-size: 0.75rem; }
+    .setup-grid { gap: 0.8rem; flex-wrap: nowrap; }
+    .input-box input { width: 75px; height: 75px; font-size: 1.4rem; }
+    .input-box button { width: 40px !important; height: 30px !important; }
+    .button-group { flex-direction: column; gap: 10px; }
+    .btn-primary, .btn-outline { width: 100%; padding: 1rem; }
+    .world-grid { grid-template-columns: 1fr; }
+    .alarm-setup-container { flex-direction: column; width: 100%; }
+    #alarmInput { width: 100% !important; }
 }
 
 @media (max-width: 480px) {
-    .big-number {
-        font-size: 3.5rem;
-    }
+    .big-number { font-size: 3.5rem; }
+    .input-box input { width: 65px; height: 65px; font-size: 1.2rem; }
+    .mode-container { padding: 1.5rem 1rem; }
+}
 
-    .input-box input {
-        width: 65px;
-        height: 65px;
-        font-size: 1.2rem;
-    }
+/* ========================================= */
+/* 11. ADIÇÕES FINAIS: VOLTAS E ALARMES      */
+/* ========================================= */
 
-    .mode-container {
-        padding: 1.5rem 1rem;
-    }
+/* Estilo para a tabela de voltas do cronômetro */
+#lapsList tr {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: background 0.2s;
+}
+
+#lapsList tr:hover {
+    background: rgba(0, 230, 230, 0.03);
+}
+
+#lapsList td {
+    padding: 12px 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.95rem;
+    color: var(--text-color);
+}
+
+/* Destaque para a primeira linha (volta mais recente) */
+#lapsList tr:first-child td {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+/* Estilo para as ações dos alarmes */
+.alarm-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.alarm-toggle, .alarm-delete {
+    background: rgba(255, 255, 255, 0.05);
+    border: none;
+    color: var(--sub-text-color);
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.alarm-toggle:hover {
+    color: var(--accent-color);
+    background: rgba(0, 230, 230, 0.1);
+}
+
+.alarm-delete {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.alarm-delete:hover {
+    color: #ff4d4d;
+    background: rgba(255, 77, 77, 0.1);
+}
+
+/* Scrollbar personalizada para as listas */
+.laps-container::-webkit-scrollbar,
+.alarm-grid-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.laps-container::-webkit-scrollbar-thumb,
+.alarm-grid-list::-webkit-scrollbar-thumb {
+    background: var(--input-border);
+    border-radius: 10px;
 }
