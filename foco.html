@@ -16,7 +16,7 @@
       <div class="logo">
         <img src="LOGO-TEXTO.png" alt="Loopr • Foco" class="logo-image">
       </div>
-      </div>
+    </div>
   </header>
 
   <div class="main-layout-wrapper">
@@ -114,6 +114,13 @@
                 <button type="button" id="btn-sw-start" class="btn-primary">INICIAR</button>
                 <button type="button" id="btn-sw-lap" class="btn-outline" disabled>MARCAR VOLTA</button>
                 <button type="button" id="btn-sw-reset" class="btn-outline">ZERAR</button>
+              </div>
+              
+              <div class="laps-container" style="margin-top: 2rem; max-height: 200px; overflow-y: auto; width: 100%;">
+                <table style="width: 100%; border-collapse: collapse; color: var(--text-color);">
+                  <tbody id="lapsList">
+                    </tbody>
+                </table>
               </div>
             </div>
           </section>
